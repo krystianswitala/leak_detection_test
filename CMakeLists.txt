@@ -9,7 +9,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
-add_executable(leak_detection_test main.cpp)
+add_executable(leak_detection_test 
+    main.cpp
+    second_module.cpp
+    second_module.hpp
+)
 
 include(CTest)
 enable_testing()

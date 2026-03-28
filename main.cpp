@@ -1,13 +1,8 @@
-#if defined(_DEBUG)
-#define _CRTDBG_MAP_ALLOC
-#include <crtdbg.h>
-#include <cstdlib>
-
-#define new new (_NORMAL_BLOCK, __FILE__, __LINE__)
-#endif // _DEBUG
-
 #include <cstdint>
 #include <iostream>
+
+#include "common_mem_sanity.hpp"
+#include "second_module.hpp"
 
 uint8_t* global_ptr = nullptr;
 
@@ -35,6 +30,9 @@ int main(int, char**)
     for (size_t i = 0; i < 256; ++i) {
         another_local_ptr[i] = static_cast<uint8_t>(i % 256);
     }
+
+    uint8_t* buffer_from_module = create_buffer(128);
+    uint8_t* buffer_from_module2 = create_buffer(64);
 
     return 0;
 }
