@@ -1,7 +1,9 @@
+#include "common_mem_sanity.hpp"
+
 #include <cstdint>
 #include <iostream>
+#include <memory>
 
-#include "common_mem_sanity.hpp"
 #include "second_module.hpp"
 
 uint8_t* global_ptr = nullptr;
@@ -33,6 +35,12 @@ int main(int, char**)
 
     uint8_t* buffer_from_module = create_buffer(128);
     uint8_t* buffer_from_module2 = create_buffer(64);
+
+    auto unique_buffer = std::make_unique<uint8_t[]>(256);
+    for (size_t i = 0; i < 256; ++i) {
+        unique_buffer[i] = static_cast<uint8_t>((i + 10) % 256);
+    }
+    uint8_t* raw_ptr_from_unique = unique_buffer.release();
 
     return 0;
 }
