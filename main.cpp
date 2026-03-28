@@ -10,11 +10,11 @@ uint8_t* global_ptr = nullptr;
 
 int main(int, char**)
 {
-#if defined(_DEBUG)
+#if defined(_MSC_VER) && defined(_DEBUG)
     // Enable run-time memory leak check for debug builds.
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
-#endif // _DEBUG
+#endif // _MSC_VER && _DEBUG
 
     std::cout << "Hello, from leak_detection_test!\n";
 
