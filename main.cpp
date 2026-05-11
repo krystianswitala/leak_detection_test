@@ -23,6 +23,10 @@ int main(int, char**)
         global_ptr[i] = static_cast<uint8_t>(i % 256);
     }
 
+    buffer_operations(global_ptr, 1024);
+    delete[] global_ptr;
+    global_ptr[0] = 0; // Use after free, should be detected by memory sanity checks.
+
     uint8_t* local_ptr = new uint8_t[512];
     for (size_t i = 0; i < 512; ++i) {
         local_ptr[i] = static_cast<uint8_t>(i % 256);
